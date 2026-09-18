@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocMind - Smart RAG Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ============ Sidebar ============ -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">◆</div>
+        <div>
+          <h1>DocMind</h1>
+          <p class="tagline">Smart RAG Chatbot</p>
+        </div>
+      </div>
+
+      <div class="kb-select-row">
+        <select id="kbSelect" class="kb-select" title="Active knowledge base"></select>
+        <button id="newKbBtn" class="icon-btn" title="New knowledge base">＋</button>
+        <button id="deleteKbBtn" class="icon-btn danger" title="Delete knowledge base">🗑</button>
+      </div>
+
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="fileInput" accept=".pdf,.docx,.txt,.md,.markdown" hidden />
+        <div class="dz-icon">⬆</div>
+        <p><strong>Drop a document</strong> or click</p>
+        <span class="dz-hint">PDF · DOCX · TXT · MD — max 25MB</span>
+      </div>
+
+      <div class="section-label">Documents</div>
+      <ul id="docList" class="doc-list"></ul>
+
+      <div class="sidebar-footer">
+        <button id="metricsBtn" class="ghost-btn">📊 Metrics &amp; Logs</button>
+      </div>
+    </aside>
+
+    <!-- ============ Chat panel ============ -->
+    <main class="chat-panel">
+      <header class="chat-header">
+        <div>
+          <div id="kbTitle" class="kb-title">Knowledge Base</div>
+          <div id="kbSub" class="kb-sub">—</div>
+        </div>
+        <button id="newChatBtn" class="ghost-btn">＋ New chat</button>
+      </header>
+
+      <div id="messages" class="messages">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-emoji">◆</div>
+          <h2>Ask anything about your documents</h2>
+          <p>Create a knowledge base, upload documents, wait for them to become
+             <strong>Ready</strong>, then ask away. Answers are grounded in your
+             files with page-level citations.</p>
+          <div id="suggestions" class="suggestions"></div>
+        </div>
+      </div>
+
+      <form id="composer" class="composer">
+        <textarea id="input" rows="1" placeholder="Ask a question about your documents…"></textarea>
+        <button id="sendBtn" type="submit" title="Send">➤</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- ============ Source viewer modal ============ -->
+  <div id="sourceModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <div id="srcDocName" class="modal-title">Source</div>
+          <div id="srcMeta" class="modal-sub"></div>
+        </div>
+        <button id="closeModal" class="icon-btn">✕</button>
+      </div>
+      <div id="srcContent" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ============ Metrics modal ============ -->
+  <div id="metricsModal" class="modal hidden">
+    <div class="modal-card wide">
+      <div class="modal-head">
+        <div class="modal-title">📊 RAG Metrics &amp; Observability</div>
+        <button id="closeMetrics" class="icon-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="metricsGrid" class="metrics-grid"></div>
+        <h3 class="logs-title">Recent queries</h3>
+        <div id="logsTable" class="logs-table"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
