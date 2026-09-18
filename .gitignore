@@ -1,0 +1,15 @@
+# Secrets — never commit these
+.env
+
+# Persisted vector DB + uploads (regenerated at runtime)
+storage/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# DocMind runtime data
+storage/
+*.tmp
